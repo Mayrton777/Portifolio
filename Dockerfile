@@ -1,25 +1,27 @@
-# Usa uma imagem leve do Node
+# Estágio 1: Build
 FROM node:20-alpine AS builder
 
-# Define o diretório de trabalho
 WORKDIR /app
 
-# Copia os arquivos de dependência
+# Copia package.json e package-lock.json (importante!)
 COPY package*.json ./
 
-# Instala as dependências
-RUN npm install
+# Usa 'ci' para instalação limpa e rápida
+RUN npm ci
 
-# Copia o resto do projeto
 COPY . .
 
+# Aqui ele vai rodar o comando que alteramos no passo 1
 RUN npm run build
 
-# Usa uma imagem leve do Nginx para servir o aplicativo
+# Estágio 2: Produção
 FROM nginx:alpine
 
-# Copia os arquivos gerados no estágio anterior para a pasta do Nginx
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/build /usr/share/nginx/html
 
-# Porta 80
+# Configuração opcional para o React Router (SPA) funcionar bem no Nginx
+# Cria um arquivo de config simples on-the-fly se necessário, 
+# mas por padrão o Nginx serve index.html bem.
 EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
