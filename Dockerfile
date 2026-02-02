@@ -1,5 +1,5 @@
 # Usa uma imagem leve do Node
-FROM node:20-alpine
+FROM node:20-alpine AS builder
 
 # Define o diretório de trabalho
 WORKDIR /app
@@ -13,8 +13,13 @@ RUN npm install
 # Copia o resto do projeto
 COPY . .
 
-# Expõe a porta padrão do Vite
-EXPOSE 5173
+RUN npm run build
 
-# O "--host" é crucial para o Docker expor a rede para o seu Ubuntu
-CMD ["npm", "run", "dev", "--", "--host"]
+# Usa uma imagem leve do Nginx para servir o aplicativo
+FROM nginx:alpine
+
+# Copia os arquivos gerados no estágio anterior para a pasta do Nginx
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Porta 80
+EXPOSE 80
