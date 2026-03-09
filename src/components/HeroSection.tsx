@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Terminal, Database, Shield } from 'lucide-react';
+import { Terminal, Database, Shield, Download } from 'lucide-react';
 
 export function HeroSection() {
   const [currentLine, setCurrentLine] = useState(0);
@@ -66,6 +66,15 @@ export function HeroSection() {
               
               <a href="https://www.linkedin.com/in/mayrton-eduardo-silva-rocha" target="_blank" rel="noopener noreferrer" className="bg-transparent hover:bg-white/5 text-white px-8 py-4 rounded font-mono font-bold border-2 border-white/20 hover:border-green-400 transition-all duration-200 text-center">
                 LINKEDIN
+              </a>
+
+              <a 
+                href="/mayrton_desenvolvedor.pdf" 
+                download="Desenvolvedor_Mayrton.pdf" 
+                className="group bg-transparent hover:bg-white/5 text-white px-8 py-4 rounded font-mono font-bold border-2 border-white/20 hover:border-green-400 transition-all duration-200 flex items-center justify-center gap-2"
+              >
+                <Download className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
+                CURRÍCULO
               </a>
             </div>
             
