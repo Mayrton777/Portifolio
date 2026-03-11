@@ -71,9 +71,8 @@ export function HeroSection() {
               <a 
                 href="/mayrton_desenvolvedor.pdf" 
                 download="Desenvolvedor_Mayrton.pdf" 
-                className="group bg-transparent hover:bg-white/5 text-white px-8 py-4 rounded font-mono font-bold border-2 border-white/20 hover:border-green-400 transition-all duration-200 flex items-center justify-center gap-2"
+                className="group bg-transparent hover:bg-white/5 text-white px-8 py-4 rounded font-mono font-bold border-2 border-white/20 hover:border-green-400 transition-all duration-200 flex flex-col md:flex-row items-center justify-center gap-2"
               >
-                <Download className="w-5 h-5 group-hover:-translate-y-1 transition-transform" />
                 CURRÍCULO
               </a>
             </div>
