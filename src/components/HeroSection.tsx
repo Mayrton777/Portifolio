@@ -95,10 +95,11 @@ export function HeroSection() {
           </div>
           
           {/* Right: VS Code Terminal */}
-          <div className="relative">
-            <div className="bg-[#1E1E1E] rounded-lg overflow-hidden border border-[#3E3E3E] shadow-2xl">
+          <div className="relative min-w-0 w-full max-w-full">
+            <div className="bg-[#1E1E1E] rounded-lg overflow-hidden border border-[#3E3E3E] shadow-2xl w-full flex flex-col">
+              
               {/* VS Code Header */}
-              <div className="bg-[#2D2D2D] px-4 py-3 flex items-center justify-between border-b border-[#3E3E3E]">
+              <div className="bg-[#2D2D2D] px-4 py-3 flex items-center justify-between border-b border-[#3E3E3E] shrink-0">
                 <div className="flex items-center gap-3">
                   <div className="flex gap-2">
                     <div className="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
@@ -114,22 +115,27 @@ export function HeroSection() {
                 </div>
               </div>
               
-              {/* Code Content */}
-              <div className="p-6 font-mono text-sm leading-relaxed min-h-[300px]">
-                {codeLines.map((line, index) => (
-                  <div
-                    key={index}
-                    className={`transition-all duration-300 ${
-                      index <= currentLine ? 'opacity-100' : 'opacity-20'
-                    }`}
-                  >
-                    <span className="text-gray-600 select-none mr-4">{String(index + 1).padStart(2, ' ')}</span>
-                    <span className={getSyntaxColor(line)}>{line}</span>
-                  </div>
-                ))}
+              <div className="w-full bg-[#1E1E1E]">
+                <div className="p-6 font-mono text-sm leading-relaxed min-h-[300px]">
+                  {codeLines.map((line, index) => (
+                    <div
+                      key={index}
+                      className={`flex transition-all duration-300 ${
+                        index <= currentLine ? 'opacity-100' : 'opacity-20'
+                      }`}
+                    >
+                      <span className="text-gray-600 select-none mr-4 w-8 shrink-0 text-right">
+                        {index + 1}
+                      </span>
+                      <span className={`whitespace-pre-wrap break-words ${getSyntaxColor(line)}`}>
+                        {line}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          </div> 
         </div>
       </div>
       
